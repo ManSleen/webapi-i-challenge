@@ -23,12 +23,12 @@ server.get("/api/users", (req, res) => {
 
 server.get("/api/users/:id", (req, res) => {
   const hubId = req.params.id;
-  Hubs.find()
+  Hubs.findById(hubId)
     .then(user => {
       res.status(200).json(user);
     })
     .catch(error => {
-      res.status(500).json({ message: "error getting user by ID" });
+      res.status(500).json({ message: "Error getting user by ID!" });
     });
 });
 
@@ -40,7 +40,7 @@ server.post("/api/users", (req, res) => {
       res.status(201).json(result);
     })
     .catch(error => {
-      res.status(500).json({ message: "error adding the hub" });
+      res.status(500).json({ message: "Error adding the user!" });
     });
 });
 
@@ -53,6 +53,23 @@ server.delete("/api/users/:id", (req, res) => {
     })
     .catch(error => {
       res.status(500).json({ message: "error removing hub" });
+    });
+});
+
+server.put("/api/users/:id", (req, res) => {
+  const { id } = req.params;
+  const changes = req.body;
+
+  Hubs.update(id, changes)
+    .then(updated => {
+      if (updated) {
+        res.status(200).json(updated);
+      } else {
+        res.status(400).json({ message: "User not found!" });
+      }
+    })
+    .catch(error => {
+      res.status(500).json({ message: "Error updating user!" });
     });
 });
 
