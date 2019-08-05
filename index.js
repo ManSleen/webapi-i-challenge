@@ -24,8 +24,8 @@ server.get("/api/users", (req, res) => {
 server.get("/api/users/:id", (req, res) => {
   const hubId = req.params.id;
   Hubs.find()
-    .then(result => {
-      res.status(200).json(result);
+    .then(user => {
+      res.status(200).json(user);
     })
     .catch(error => {
       res.status(500).json({ message: "error getting user by ID" });
@@ -44,7 +44,7 @@ server.post("/api/users", (req, res) => {
     });
 });
 
-server.delete("hubs/:id", (req, res) => {
+server.delete("/api/users/:id", (req, res) => {
   const hubId = req.params.id;
 
   Hubs.remove(hubId)
