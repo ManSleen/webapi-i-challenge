@@ -41,6 +41,7 @@ const User = ({ user, deleteUser }) => {
         </CardContent>
         <CardActions>
           <Button onClick={() => deleteUser(user.id)}>Delete</Button>
+          <Button onClick={() => {}}>Edit</Button>
         </CardActions>
       </CardActionArea>
     </Card>
